@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Лабораторная работа №2 ТРСЧВП">
+    <link rel="stylesheet" href="/style.css">
+    <title>Laba 2</title>
+</head>
+
+
+<body>
+    <header>
+        <h1>РЕЗУЛЬТАТЫ ОПРОСА</h1>
+    </header>
+
+    <section class="main-forms">
+        <p>Общее количество респондентов: <%=data.length %></p>
+        <% 
+        const questionNumbers = [1, 2, 7];
+        const averages = {};
+
+        questionNumbers.forEach(qNum => {
+            let sum = 0;
+            const key = qNum.toString();
+    
+            data.forEach((item) => {
+                sum += parseFloat(item.answers[key]);
+            });
+    
+            averages[qNum] = sum / data.length;
+        });
+        %>
+
+        <div>
+        <% questionNumbers.forEach(qNum => { %>
+            <p>Средний балл по вопросу <%= qNum %>: <%= averages[qNum].toFixed(2) %></p>
+        <% }) %>
+        </div>
+
+        <div class="result-forms">
+
+        </div>
+    </section>
+
+    <footer>
+        <p>2026 Нагорский Б. Н.</p>
+        <p>КТбо3-7</p>
+    </footer>
+</body>
+</html>

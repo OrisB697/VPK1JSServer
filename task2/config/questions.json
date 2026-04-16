@@ -1,0 +1,30 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "text",
+      "question": "Что вам больше всего понравилось на курсе?",
+      "required": true
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "question": "Что можно улучшить в курсе?",
+      "required": true
+    },
+    {
+      "id": 3,
+      "type": "rating",
+      "question": "Оцените курс по шкале от 1 до 5",
+      "min": 1,
+      "max": 5,
+      "required": true
+    },
+    {
+      "id": 4,
+      "type": "text",
+      "question": "Ваши пожелания и рекомендации",
+      "required": false
+    }
+  ]
+}

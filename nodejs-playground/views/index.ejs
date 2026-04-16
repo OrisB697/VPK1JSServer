@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Лабораторная работа №2 ТРСЧВП">
+    <link rel="stylesheet" href="/style.css">
+    <title>Laba 2</title>
+</head>
+
+
+
+<body>
+    
+    <header>
+        <h1>МОНИТОРИНГ КАЧЕСТВА ОБУЧЕНИЯ</h1>
+    </header>
+    <section class="annotation">
+        <p>Здравствуйте! Приглашаем Вас заполнить небольшую форму, которая поможет нам лучше понять свои слабые и сильные стороны. 
+            Тест полностью анонимный, не стесняйтесь рассказывать о том, что не нравится! Пожалуйста, отнеситесь серьезно к прохождению.
+            Все прохождение займет не более 5 минут.
+        </p>
+    </section>
+    <section class="main-forms">
+        <form method="POST" action="/submit">
+            
+            <% Object.entries(data).forEach(([key, question]) => { %>
+                <div class="question-block">
+                    <label for="<%= key %>"><%= question %></label>
+                    
+                    <% if(question.includes('от 1 до 5')) { %>
+                        <!-- Для оценки от 1 до 5 -->
+                        <div class="rating">
+                            <% for(let i = 1; i <= 5; i++) { %>
+                                <label>
+                                    <input type="radio" id="<%= key %>" name="<%= key %>" value="<%= i %>" required> <%= i %>
+                                </label>
+                            <% } %>
+                        </div>
+                    <% } else { %>
+                        <!-- Для текстовых ответов -->
+                        <textarea 
+                            name="<%= key %>" 
+                            id="<%= key %>"
+                            rows="4" 
+                            cols="50"
+                            placeholder="Ваш ответ..."
+                            required
+                        ></textarea>
+                    <% } %>
+                </div>
+            <% }) %>
+            <button type="submit">Отправить ответы</button>
+        </form>
+        <form method="POST" action="/direction">
+            <button type="direction">Зайти на страницу дирекции</button>
+        </form>
+    </section>
+</body>
+<footer>
+    <p>2026 Нагорский Б. Н.</p>
+    <p>КТбо3-7</p>
+</footer>
+</html>

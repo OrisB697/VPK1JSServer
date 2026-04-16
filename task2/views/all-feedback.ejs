@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Все отзывы студентов</h1>
+            <nav>
+                <a href="/feedback">Оставить отзыв</a>
+                <a href="/dashboard">Дашборд</a>
+                <a href="/all-feedback" class="active">Все отзывы</a>
+            </nav>
+        </header>
+        
+        <main>
+            <% if (feedbacks.length === 0) { %>
+                <div class="empty-state">
+                    <p>Пока нет ни одного отзыва. Будьте первым!</p>
+                    <a href="/feedback" class="btn">Оставить отзыв</a>
+                </div>
+            <% } else { %>
+                <div class="feedback-list">
+                    <% feedbacks.forEach(feedback => { %>
+                        <div class="feedback-card">
+                            <div class="feedback-header">
+                                <span class="feedback-date">
+                                    <%= new Date(feedback.date).toLocaleString('ru-RU') %>
+                                </span>
+                                <span class="feedback-id">ID: <%= feedback.id %></span>
+                            </div>
+                            
+                            <div class="feedback-content">
+                                <table class="answers-table">
+                                    <% Object.values(feedback.answers).forEach(answer => { %>
+                                        <tr>
+                                            <td class="question-cell">
+                                                <strong><%= answer.question %></strong>
+                                            </td>
+                                            <td class="answer-cell">
+                                                <% if (answer.type === 'rating') { %>
+                                                    <span class="rating-stars">
+                                                        <%= '★'.repeat(answer.answer) %><%= '☆'.repeat(5 - answer.answer) %>
+                                                    </span>
+                                                    <span class="rating-value">(<%= answer.answer %>/5)</span>
+                                                <% } else { %>
+                                                    <%= answer.answer %>
+                                                <% } %>
+                                            </td>
+                                        </tr>
+                                    <% }); %>
+                                </table>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } %>
+        </main>
+        
+        <footer>
+            <p>Система сбора обратной связи &copy; 2024</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Форма обратной связи</h1>
+            <nav>
+                <a href="/feedback" class="active">Оставить отзыв</a>
+                <a href="/dashboard">Дашборд</a>
+                <a href="/all-feedback">Все отзывы</a>
+            </nav>
+        </header>
+        
+        <main>
+            <form action="/submit-feedback" method="POST" class="feedback-form">
+                <% questions.forEach(question => { %>
+                    <div class="form-group">
+                        <label for="question_<%= question.id %>">
+                            <%= question.question %>
+                            <% if (question.required) { %>
+                                <span class="required">*</span>
+                            <% } %>
+                        </label>
+                        
+                        <% if (question.type === 'text') { %>
+                            <textarea 
+                                id="question_<%= question.id %>"
+                                name="question_<%= question.id %>"
+                                rows="4"
+                                <%= question.required ? 'required' : '' %>
+                                placeholder="Введите ваш ответ..."
+                            ></textarea>
+                        <% } else if (question.type === 'rating') { %>
+                            <div class="rating-group">
+                                <div class="rating-inputs">
+                                    <% for (let i = question.min; i <= question.max; i++) { %>
+                                        <label class="rating-label">
+                                            <input 
+                                                type="radio"
+                                                name="question_<%= question.id %>"
+                                                value="<%= i %>"
+                                                <%= question.required && i === 3 ? 'checked' : '' %>
+                                                <%= question.required ? 'required' : '' %>
+                                            >
+                                            <%= i %>
+                                        </label>
+                                    <% } %>
+                                </div>
+                                <div class="rating-labels">
+                                    <span>Плохо</span>
+                                    <span>Отлично</span>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                <% }); %>
+                
+                <button type="submit" class="submit-btn">Отправить отзыв</button>
+            </form>
+        </main>
+        
+        <footer>
+            <p>Система сбора обратной связи &copy; 2024</p>
+        </footer>
+    </div>
+</body>
+</html>
