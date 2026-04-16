@@ -27,6 +27,10 @@ app.post('/direction', (req, res) => {
     res.render('direction', {data: readJsonDataDirection()});
 })
 
+app.post('/textplaces', (req, res) => {
+    res.render('textplaces', {data: readJsonDataDirection()});
+})
+
 function readJsonDataDirection()
 {
     const dirName = path.join(__dirname, 'res/answers.json');

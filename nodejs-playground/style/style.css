@@ -61,6 +61,37 @@
         
     }
 
+    .user-text {
+        background-color: lightgray;
+        border-radius: 5px;
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+        padding: 5px;
+        margin-top: 10px;
+        max-height: 300px;
+        overflow-y: auto;
+        word-wrap: break-word;
+    }
+
+    .sub-ans {
+        align-self: ;
+    }
+
+    .textplace-main {
+        width: 85%;
+        align-self: center;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        align-items: center;
+        gap: 1%;
+        padding: 10px 0 10px 0;
+    }
+
+    .title-for-q {
+        margin-left: 5px;
+    }
+
     button {
         align-self: center;
     margin-top: 20px;
