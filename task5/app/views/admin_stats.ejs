@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head><title>Статистика</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+    <header><h1>Статистика пользователей</h1></header>
+    <main style="max-width:1000px; margin:20px auto;">
+        <table border="1" cellpadding="8" style="width:100%; border-collapse:collapse;">
+            <tr><th>Логин</th><th>Всего ответов</th><th>Правильных</th><th>Процент</th></tr>
+            <% usersStats.forEach(u => { %>
+                <tr>
+                    <td><%= u.login %></td>
+                    <td><%= u.total_answers || 0 %></td>
+                    <td><%= u.correct_answers || 0 %></td>
+                    <td><%= u.percentage ? u.percentage + '%' : '-' %></td>
+                </tr>
+            <% }) %>
+        </table>
+        <br><a href="/">На главную</a>
+    </main>
+</body>
+</html>

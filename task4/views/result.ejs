@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head><title>Результат</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+    <header><h1>Результаты теста</h1></header>
+    <main style="text-align:center; margin-top:50px;">
+        <h2>Вы ответили правильно на <%= correctCount %> из <%= total %> вопросов.</h2>
+        <p>Процент: <%= (correctCount / total * 100).toFixed(2) %>%</p>
+        <a href="/">Пройти тест снова</a> | <a href="/logout">Выйти</a>
+    </main>
+</body>
+</html>

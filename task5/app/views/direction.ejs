@@ -5,36 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Лабораторная работа №2 ТРСЧВП">
     <link rel="stylesheet" href="/style.css">
-    <title>Laba 3 text answers</title>
+    <title>Laba 2</title>
 </head>
 
 
 <body>
     <header>
-        <h1>ТЕКСТОВЫЕ ОТВЕТЫ</h1>
+        <h1>РЕЗУЛЬТАТЫ ОПРОСА</h1>
     </header>
 
-    <main class="textplace-main">
-        <%
-        const textNumbers = [3, 4, 5, 6];
-        const ansUser = {};
+    <section class="main-forms">
+        <p>Общее количество респондентов: <%=data.length %></p>
+        <% 
+        const questionNumbers = [1, 2, 7];
+        const averages = {};
 
-        for(let i = 0; i < data.length; i++) {%>
-            <section class="user-text">
-                <p class="user-number">Пользователь <%=i + 1 %></p>
-
-            <% textNumbers.forEach(tNum => {
-                const key = tNum.toString();%>
-                <p class="title-for-q">Вопрос № <%=tNum %></p>
-                <p><%=data[i].answers[key]  %></p>
-            <%})%>
-            </section>
-        <%}
-
-
-
+        questionNumbers.forEach(qNum => {
+            let sum = 0;
+            const key = qNum.toString();
+    
+            data.forEach((item) => {
+                sum += parseFloat(item.answers[key]);
+            });
+    
+            averages[qNum] = sum / data.length;
+        });
         %>
-    </main>
+
+        <div>
+        <% questionNumbers.forEach(qNum => { %>
+            <p>Средний балл по вопросу <%= qNum %>: <%= averages[qNum].toFixed(2) %></p>
+        <% }) %>
+        </div>
+
+        <div class="result-forms">
+
+        </div>
+    </section>
     <nav>
     <div class="nav-container">
         <% if (user) { %>

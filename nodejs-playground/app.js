@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, 'style')));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
-    secret: 'your-secret-key-change-in-production',
+    secret: 'dfg987dfgs9s9g7d8yijh29d9g9',
     resave: false,
     saveUninitialized: false,
     cookie: { 

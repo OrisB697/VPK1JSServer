@@ -1,0 +1,73 @@
+<%- include('../partials/header') %>
+
+<h2>Список задач</h2>
+
+<div class="filters">
+    <form method="GET" class="filter-form">
+        <div class="filter-group">
+            <label>Статус:</label>
+            <select name="status">
+                <option value="">Все</option>
+                <option value="todo" <%= currentStatus === 'todo' ? 'selected' : '' %>>К выполнению</option>
+                <option value="in_progress" <%= currentStatus === 'in_progress' ? 'selected' : '' %>>В работе</option>
+                <option value="done" <%= currentStatus === 'done' ? 'selected' : '' %>>Выполнено</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Проект:</label>
+            <select name="project_id">
+                <option value="">Все проекты</option>
+                <% projects.forEach(project => { %>
+                    <option value="<%= project.id %>" <%= currentProjectId == project.id ? 'selected' : '' %>>
+                        <%= project.project_name %>
+                    </option>
+                <% }) %>
+            </select>
+        </div>
+        <button type="submit">Фильтровать</button>
+    </form>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Заголовок</th>
+            <th>Проект</th>
+            <th>Статус</th>
+            <th>Приоритет</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% tasks.forEach(task => { %>
+            <tr>
+                <td><a href="/tasks/<%= task.id %>"><%= task.title %></a></td>
+                <td><%= task.project_name %></td>
+                <td>
+                    <span class="status-badge status-<%= task.status %>">
+                        <%= task.status === 'todo' ? 'К выполнению' : (task.status === 'in_progress' ? 'В работе' : 'Выполнено') %>
+                    </span>
+                </td>
+                <td class="priority-<%= task.priority >= 4 ? 'high' : (task.priority >= 2 ? 'medium' : 'low') %>">
+                    <%= '!'.repeat(task.priority) %><%= '☆'.repeat(5 - task.priority) %>
+                </td>
+                <td>
+                    <form method="POST" action="/tasks/<%= task.id %>/status" style="display: inline;">
+                        <select name="newStatus" onchange="this.form.submit()">
+                            <option value="todo" <%= task.status === 'todo' ? 'selected' : '' %>>К выполнению</option>
+                            <option value="in_progress" <%= task.status === 'in_progress' ? 'selected' : '' %>>В работе</option>
+                            <option value="done" <%= task.status === 'done' ? 'selected' : '' %>>Выполнено</option>
+                        </select>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+        <% if (tasks.length === 0) { %>
+            <tr>
+                <td colspan="5" style="text-align: center;">Нет задач</td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<%- include('../partials/footer') %>
